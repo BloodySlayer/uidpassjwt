@@ -185,6 +185,20 @@ def process_token(uid, password):
     except Exception as e:
         return {"error": f"Request error: {e}"}
 
+
+# ── Health check ──────────────────────────────────────────────
+@app.route('/', methods=['GET'])
+def index():
+    return jsonify({
+        "status": "online",
+        "message": "QuickBro Token API is running!",
+        "endpoints": {
+            "token": "/token?uid=YOUR_UID&password=YOUR_PASSWORD"
+        }
+    })
+
+
+# ── Main token endpoint ───────────────────────────────────────
 @app.route('/token', methods=['GET'])
 def get_token_response():
 
@@ -203,6 +217,8 @@ def get_token_response():
     response.headers["Content-Type"] = "application/json"
     return response
 
+
+# ── Only used locally, Railway uses gunicorn ─────────────────
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+    port = int(os.environ.get("PORT", 8080))
+    app.run(host="0.0.0.0", port=port, debug=False)
