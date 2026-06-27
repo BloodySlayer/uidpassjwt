@@ -22,7 +22,7 @@ AES_IV = b'6oyZDr22E3ychjM%'
 app = Flask(__name__)
 
 def get_token(password, uid):
-    url = "https://ffmconnect.live.gop.garenanow.com/api/v2/oauth/guest/token:grant"
+    url = "https://ffmconnect.live.gop.garenanow.com/oauth/guest/token/grant"
 
     headers = {
         "User-Agent": "GarenaMSDK/4.0.19P4(G011A ;Android 9;en;US;)",
@@ -94,13 +94,13 @@ def process_token(uid, password):
 
     # ---- GAME DATA ----
     game_data = my_pb2.GameData()
-    game_data.timestamp = "2024-12-05 18:15:32"
+    game_data.timestamp = "2026-06-26 03:47:37"
     game_data.game_name = "free fire"
     game_data.game_version = 1
-    game_data.version_code = "1.123.1"
-    game_data.os_info = "Android OS 9 / API-28 (PI/rel.cjw.20220518.114133)"
+    game_data.version_code = "1.126.5"
+    game_data.os_info = "Android OS 5.1.1 / API-22 (LMY48Z/rel.se.infra.20220128.171448)"
     game_data.device_type = "Handheld"
-    game_data.network_provider = "Verizon Wireless"
+    game_data.network_provider = "GrameenPhone"
     game_data.connection_type = "WIFI"
     game_data.screen_width = 1280
     game_data.screen_height = 960
@@ -109,14 +109,14 @@ def process_token(uid, password):
     game_data.total_ram = 5951
     game_data.gpu_name = "Adreno (TM) 640"
     game_data.gpu_version = "OpenGL ES 3.0"
-    game_data.user_id = "Google|74b585a9-0268-4ad3-8f36-ef41d2e53610"
-    game_data.ip_address = "172.190.111.97"
+    game_data.user_id = "Google|4645e530-e790-4be2-ae7c-6f64d1259603"
+    game_data.ip_address = "103.72.212.253"
     game_data.language = "en"
     game_data.open_id = token_data.get('open_id') or ''
     game_data.access_token = token_data.get('access_token') or ''
     game_data.platform_type = 4
     game_data.device_form_factor = "Handheld"
-    game_data.device_model = "Asus ASUS_I005DA"
+    game_data.device_model = "Asus ASUS_AI2401_A"
     game_data.field_60 = 32968
     game_data.field_61 = 29815
     game_data.field_62 = 2479
