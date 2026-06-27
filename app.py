@@ -22,11 +22,11 @@ AES_IV = b'6oyZDr22E3ychjM%'
 app = Flask(__name__)
 
 def get_token(password, uid):
-    url = "https://ffmconnect.live.gop.garenanow.com/oauth/guest/token/grant"
+    url = "https://ffmconnect.live.gop.garenanow.com/api/v2/oauth/guest/token:grant"
 
     headers = {
-        "User-Agent": "GarenaMSDK/4.0.19P4(G011A ;Android 9;en;US;)",
-        "Content-Type": "application/x-www-form-urlencoded"
+        "User-Agent": "GarenaMSDK/4.0.42(SM-X210 tablet;Android 14;en;IN;app 2.127.1 2019118047;)",
+        "Content-Type": "application/json; charset=utf-8"
     }
 
     data = {
@@ -160,8 +160,7 @@ def process_token(uid, password):
         'Expect': "100-continue",
         'X-GA': "v1 1",
         'X-Unity-Version': "2022.3.47f1",
-        'ReleaseVersion': "OB54",
-        'Content-Length': "1008"
+        'ReleaseVersion': "OB54"
     }
 
     try:
