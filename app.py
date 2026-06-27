@@ -160,7 +160,7 @@ def process_token(uid, password):
         'Expect': "100-continue",
         'X-GA': "v1 1",
         'X-Unity-Version': "2022.3.47f1",
-        'ReleaseVersion': "OB54"
+        'ReleaseVersion': "OB53"
     }
 
     try:
