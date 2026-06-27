@@ -97,7 +97,7 @@ def process_token(uid, password):
     game_data.timestamp = "2024-12-05 18:15:32"
     game_data.game_name = "free fire"
     game_data.game_version = 1
-    game_data.version_code = "1.123.1"
+    game_data.version_code = "1.126.2"
     game_data.os_info = "Android OS 9 / API-28 (PI/rel.cjw.20220518.114133)"
     game_data.device_type = "Handheld"
     game_data.network_provider = "Verizon Wireless"
@@ -160,7 +160,8 @@ def process_token(uid, password):
         'Expect': "100-continue",
         'X-GA': "v1 1",
         'X-Unity-Version': "2022.3.47f1",
-        'ReleaseVersion': "OB53"
+        'ReleaseVersion': "OB54",
+        'Content-Length': "1008"
     }
 
     try:
