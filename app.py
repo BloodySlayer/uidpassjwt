@@ -5,6 +5,8 @@ sys.path.append("/")
 
 from flask import Flask, jsonify, request, make_response
 import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad
 import binascii
@@ -20,6 +22,28 @@ AES_KEY = b'Yg&tc%DEuh6%Zc^8'
 AES_IV = b'6oyZDr22E3ychjM%'
 
 app = Flask(__name__)
+
+# --- Persistent, connection-pooled session ---
+# The previous code used the bare `requests.post(...)` module-level
+# function, which does not reuse connections across calls — every request
+# to Garena's guest-token endpoint and every request to the login endpoint
+# paid for a fresh DNS lookup + TCP handshake + TLS handshake, every time.
+# Both endpoints are fixed hosts hit on every request, so a shared Session
+# with keep-alive pooling avoids re-negotiating those connections.
+SESSION = requests.Session()
+_adapter = HTTPAdapter(
+    pool_connections=20,
+    pool_maxsize=20,
+    max_retries=Retry(total=0),  # fail fast instead of silently retrying and eating the timeout budget
+)
+SESSION.mount("https://", _adapter)
+SESSION.mount("http://", _adapter)
+
+# Explicit timeouts — the original code had none, so a stalled upstream
+# host could hang a worker indefinitely instead of failing fast.
+TOKEN_TIMEOUT = (3, 8)   # (connect, read) seconds
+LOGIN_TIMEOUT = (3, 10)  # login does more work server-side, give it a bit more
+
 
 def get_token(password, uid):
     url = "https://ffmconnect.live.gop.garenanow.com/oauth/guest/token/grant"
@@ -38,11 +62,14 @@ def get_token(password, uid):
         "client_id": "100067"
     }
 
-    r = requests.post(url, headers=headers, data=data)
+    try:
+        r = SESSION.post(url, headers=headers, data=data, timeout=TOKEN_TIMEOUT)
+    except requests.RequestException as e:
+        return {"error": f"OAuth request failed: {e}"}
 
     try:
         j = r.json()
-    except:
+    except Exception:
         return {
             "error": "OAuth non JSON",
             "raw": r.text
@@ -86,6 +113,9 @@ def process_token(uid, password):
 
     if not token_data:
         return {"error": "Failed to retrieve token"}
+
+    if "error" in token_data:
+        return token_data
 
     if "raw" in token_data:
         oauth_raw = token_data["raw"]
@@ -164,7 +194,7 @@ def process_token(uid, password):
     }
 
     try:
-        response = requests.post(url, data=encrypted_data, headers=headers, verify=False)
+        response = SESSION.post(url, data=encrypted_data, headers=headers, verify=False, timeout=LOGIN_TIMEOUT)
 
         if response.status_code == 200:
             example_msg = output_pb2.Garena_420()
