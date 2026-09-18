@@ -46,7 +46,7 @@ LOGIN_TIMEOUT = (3, 10)  # login does more work server-side, give it a bit more
 
 
 def get_token(password, uid):
-    url = "https://ffmconnect.live.gop.garenanow.com/oauth/guest/token/grant"
+    url = "https://100067.connect.garena.com/oauth/guest/token/grant"
 
     headers = {
         "User-Agent": "GarenaMSDK/4.0.19P4(G011A ;Android 9;en;US;)",
@@ -127,7 +127,7 @@ def process_token(uid, password):
     game_data.timestamp = "2026-06-26 03:47:37"
     game_data.game_name = "free fire"
     game_data.game_version = 1
-    game_data.version_code = "1.132.1"
+    game_data.version_code = "1.111.1"
     game_data.os_info = "Android OS 5.1.1 / API-22 (LMY48Z/rel.se.infra.20220128.171448)"
     game_data.device_type = "Handheld"
     game_data.network_provider = "GrameenPhone"
