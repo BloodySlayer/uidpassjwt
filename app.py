@@ -127,7 +127,7 @@ def process_token(uid, password):
     game_data.timestamp = "2026-06-26 03:47:37"
     game_data.game_name = "free fire"
     game_data.game_version = 1
-    game_data.version_code = "1.126.5"
+    game_data.version_code = "1.132.1"
     game_data.os_info = "Android OS 5.1.1 / API-22 (LMY48Z/rel.se.infra.20220128.171448)"
     game_data.device_type = "Handheld"
     game_data.network_provider = "GrameenPhone"
@@ -181,7 +181,7 @@ def process_token(uid, password):
     serialized_data = game_data.SerializeToString()
     encrypted_data = encrypt_message(AES_KEY, AES_IV, serialized_data)
 
-    url = "https://loginbp.ggpolarbear.com/MajorLogin"
+    url = "https://loginbp.ppmainecoonghj.com/MajorLogin"
     headers = {
         'User-Agent': "Dalvik/2.1.0 (Linux; U; Android 9; ASUS_Z01QD Build/PI)",
         'Connection': "Keep-Alive",
@@ -189,8 +189,8 @@ def process_token(uid, password):
         'Content-Type': "application/octet-stream",
         'Expect': "100-continue",
         'X-GA': "v1 1",
-        'X-Unity-Version': "2022.3.47f1",
-        'ReleaseVersion': "OB54"
+        'X-Unity-Version': "2018.4.12f1",
+        'ReleaseVersion': "OB55"
     }
 
     try:
