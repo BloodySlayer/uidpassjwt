@@ -181,7 +181,7 @@ def process_token(uid, password):
     serialized_data = game_data.SerializeToString()
     encrypted_data = encrypt_message(AES_KEY, AES_IV, serialized_data)
 
-    url = "https://loginbp.ppmainecoonghj.com/MajorLogin"
+    url = "https://loginbp.ppmainecoonghj.com///MajorLogin"
     headers = {
         'User-Agent': "Dalvik/2.1.0 (Linux; U; Android 9; ASUS_Z01QD Build/PI)",
         'Connection': "Keep-Alive",
