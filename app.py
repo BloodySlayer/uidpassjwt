@@ -46,10 +46,10 @@ LOGIN_TIMEOUT = (3, 10)  # login does more work server-side, give it a bit more
 
 
 def get_token(password, uid):
-    url = "https://ffmconnect.live.gop.garenanow.com/oauth/guest/token/grant"
+    url = "https://100067.connect.garena.com/api/v2/oauth/guest/token:grant"
 
     headers = {
-        "User-Agent": "GarenaMSDK/4.0.19P4(G011A ;Android 9;en;US;)",
+        "User-Agent": "Dalvik/2.1.0 (Linux; U; Android 13; CPH2095 Build/RKQ1.211119.001)",
         "Content-Type": "application/x-www-form-urlencoded"
     }
 
